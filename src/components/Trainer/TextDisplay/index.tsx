@@ -5,8 +5,10 @@ const TextWrapper = styled.div`
   font-size: 1.5em;
   background-color: #dedede;
   color: #222;
-  padding: 10px;
+  padding: 10px 20px;
+  width: 100%;
   border-radius: 5px;
+  line-height: 1.5em;
 `;
 
 const SpanHighlighted = styled.span`

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const FlexHeader = styled.header`
-  padding: 10px;
+  padding: 10px 20px;
   display: flex;
   width: 100%;
   background-color: #555;
@@ -11,7 +11,9 @@ const FlexHeader = styled.header`
 const Header = () => {
   return (
     <FlexHeader>
-      <div>Stats (login required)</div>
+      <div>
+        Average CPM/error: 256/5%
+      </div>
       <div>Profile</div>
     </FlexHeader>
   )

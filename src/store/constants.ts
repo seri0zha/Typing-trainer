@@ -1,2 +1,7 @@
+// trainer reducer
 export const SET_TEXT = "SET_TEXT";
 export const SET_CURRENT_POSTITION = "INCREMENT_CURRENT_POSTITION";
+export const SET_CURRENT_INPUT_TEXT = "SET_CURRENT_INPUT_TEXT";
+// stats reducer
+export const SET_CURRENT_MISTAKES = "SET_CURRENT_MISTAKES";
+export const SET_OVERALL_MISTAKES = "SET_OVERALL_MISTAKES";

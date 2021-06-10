@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { setCurrentPosition } from "../../../store/actions/trainerActions";
+import { setCurrentMistakes } from "../../../store/actions/statsActions";
+import { setCurrentInputText, setCurrentPosition } from "../../../store/actions/trainerActions";
 
 interface TextInputProps {
   // useState action to set string color
@@ -10,33 +11,40 @@ interface TextInputProps {
 
 const Input = styled.input`
   font-size: 1.5em;
+  padding: 10px 20px;
 `;
 
 const TextInput: React.FC<TextInputProps> = (props) => {
-  const currentPosition = useAppSelector(state => state.trainer.currentPosition);
-  const text = useAppSelector(state => state.trainer.text);
+  const trainer = useAppSelector(state => state.trainer);
+  const currentMistakes = useAppSelector(state => state.stats.mistakes.current);
+  const [onMistake, setOnMistake] = useState<boolean>(false);
   const dispatch = useAppDispatch();
-  const [inputValue, setInputValue] = useState('');
-
+  
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value[e.currentTarget.value.length - 1];
-
-    if (value === text[currentPosition]) {
-      props.setCurrentSymbolColor("green");
-      setInputValue(prevState => prevState + value);
-      dispatch(setCurrentPosition(currentPosition+1));
-
-      if (value === ' ') {
-        setInputValue('');
+    if (trainer.text !== '') {
+      if (value === trainer.text[trainer.currentPosition]) {
+        setOnMistake(false);
+        props.setCurrentSymbolColor("green");
+        dispatch(setCurrentInputText(trainer.currentInputText + value));
+        dispatch(setCurrentPosition(trainer.currentPosition+1));
+        if (value === ' ') {
+          dispatch(setCurrentInputText(''));
+        }
+      } else {
+        if (!onMistake) {
+          debugger;
+          dispatch(setCurrentMistakes(currentMistakes + 1));
+        }
+        setOnMistake(true);
+        props.setCurrentSymbolColor("red");
       }
-    } else {
-      props.setCurrentSymbolColor("red");
     }
   }
 
   return (
     <Input 
-      value={inputValue} 
+      value={trainer.currentInputText} 
       onChange={onInputChange}/>
   )
 };

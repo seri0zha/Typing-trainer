@@ -1,4 +1,4 @@
-import { SET_CURRENT_POSTITION, SET_TEXT } from "../constants";
+import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_TEXT } from "../constants";
 
 export const setCurrentPosition = (position: number) => ({
   type: SET_CURRENT_POSTITION, 
@@ -9,3 +9,7 @@ export const setText = (text: string) => ({
   payload: text
 });
 
+export const setCurrentInputText = (text: string) => ({
+  type: SET_CURRENT_INPUT_TEXT,
+  payload: text
+})

@@ -1,13 +1,15 @@
 import { AnyAction, Reducer } from "@reduxjs/toolkit";
-import { SET_CURRENT_POSTITION, SET_TEXT } from "../constants";
+import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_TEXT } from "../constants";
 
 interface TrainerReducerState {
   text: string,
+  currentInputText: string,
   currentPosition: number,
 }
 
 const initialState: TrainerReducerState = {
   text: "",
+  currentInputText: "",
   currentPosition: 0
 };
 
@@ -26,6 +28,11 @@ const trainerReducer: Reducer<TrainerReducerState, AnyAction> =
         currentPosition: action.payload
       };
     
+    case SET_CURRENT_INPUT_TEXT:
+      return {
+        ...state,
+        currentInputText: action.payload
+      }
     default:
       return {...state};
   }
