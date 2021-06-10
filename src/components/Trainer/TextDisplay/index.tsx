@@ -11,7 +11,7 @@ const TextWrapper = styled.div`
 
 const SpanHighlighted = styled.span`
   color: #dedede;
-  background-color: green;
+  background-color: ${props => props.color};
 `;
 
 interface TextDisplayProps {
