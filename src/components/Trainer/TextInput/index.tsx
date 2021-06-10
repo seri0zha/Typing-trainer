@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { incrementCurrentPosition } from "../../../store/actions/trainerActions";
+import { setCurrentPosition } from "../../../store/actions/trainerActions";
 
 interface TextInputProps {
   // useState action to set string color
@@ -24,7 +24,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
     if (value === text[currentPosition]) {
       props.setCurrentSymbolColor("green");
       setInputValue(prevState => prevState + value);
-      dispatch(incrementCurrentPosition());
+      dispatch(setCurrentPosition(currentPosition+1));
 
       if (value === ' ') {
         setInputValue('');

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "styled-components";
 import { fetchText } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setText } from "../../store/actions/trainerActions";
+import { setCurrentPosition, setText } from "../../store/actions/trainerActions";
 import TextDisplay from "./TextDisplay";
 import TextInput from "./TextInput";
 
@@ -23,6 +23,7 @@ const Trainer = () => {
       text.lastIndexOf('<p>') + 3,
       text.lastIndexOf('</p>'));
     dispatch(setText(removedTagsText));
+    dispatch(setCurrentPosition(0));
   }
   return (
     <TrainerWrapper>

@@ -1,5 +1,11 @@
-import { INCREMENT_CURRENT_POSTITION, SET_TEXT } from "../constants";
+import { SET_CURRENT_POSTITION, SET_TEXT } from "../constants";
 
-export const incrementCurrentPosition = () => ({type: INCREMENT_CURRENT_POSTITION});
-export const setText = (text: string) => ({type: SET_TEXT, payload: text});
+export const setCurrentPosition = (position: number) => ({
+  type: SET_CURRENT_POSTITION, 
+  payload: position
+});
+export const setText = (text: string) => ({
+  type: SET_TEXT, 
+  payload: text
+});
 

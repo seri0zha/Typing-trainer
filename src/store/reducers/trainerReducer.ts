@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "@reduxjs/toolkit";
-import { INCREMENT_CURRENT_POSTITION, SET_TEXT } from "../constants";
+import { SET_CURRENT_POSTITION, SET_TEXT } from "../constants";
 
 interface TrainerReducerState {
   text: string,
@@ -20,10 +20,10 @@ const trainerReducer: Reducer<TrainerReducerState, AnyAction> =
         text: action.payload
       };
     
-    case INCREMENT_CURRENT_POSTITION: 
+    case SET_CURRENT_POSTITION: 
       return {
         ...state,
-        currentPosition: state.currentPosition + 1
+        currentPosition: action.payload
       };
     
     default:
