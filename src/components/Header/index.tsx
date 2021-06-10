@@ -3,7 +3,6 @@ import styled from "styled-components";
 const FlexHeader = styled.header`
   padding: 10px 20px;
   display: flex;
-  width: 100%;
   background-color: #555;
   justify-content: space-between;
 `;

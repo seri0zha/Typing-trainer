@@ -1,11 +1,16 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { fetchText } from "../../api";
-import { useAppDispatch, useAppSelector } from "../../store";
+import { useAppDispatch } from "../../store";
 import { setCurrentPosition, setText } from "../../store/actions/trainerActions";
 import TextDisplay from "./TextDisplay";
 import Controls from "./Controls";
 import TextInput from "./TextInput";
+
+interface TrainerProps {
+  text: string,
+  symbolToHighlight: number,
+}
 
 const TrainerWrapper = styled.div`
   display: flex;
@@ -13,19 +18,18 @@ const TrainerWrapper = styled.div`
   justify-content: center;
 `;
 
-const Trainer = () => {
+const Trainer: React.FC<TrainerProps> = (props) => {
   const dispatch = useAppDispatch();
-  const text = useAppSelector(state => state.trainer.text)
   const [currentSymbolColor, setCurrentSymbolColor] = useState('green');
   const onStartButtonClick = async () => {
     const response = await fetchText(1);
-    const text = response?.data;
+    const fetchedText = response?.data;
 
     // We must extract the text that's 
     // placed beetween <p> and </p> tags
-    const textWithoutTags = text.substring(
-      text.lastIndexOf('<p>') + 3,
-      text.lastIndexOf('</p>'));
+    const textWithoutTags = fetchedText.substring(
+      fetchedText.lastIndexOf('<p>') + 3,
+      fetchedText.lastIndexOf('</p>'));
     dispatch(setText(textWithoutTags));
     dispatch(setCurrentPosition(0));
     setCurrentSymbolColor("green");
@@ -33,7 +37,8 @@ const Trainer = () => {
   return (
     <TrainerWrapper>
       <TextDisplay 
-        text={text}
+        text={props.text}
+        symbolToHighlight={props.symbolToHighlight}
         color={currentSymbolColor}/>
       <TextInput 
         setCurrentSymbolColor={setCurrentSymbolColor}/>

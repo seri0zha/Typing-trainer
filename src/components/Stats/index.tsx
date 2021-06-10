@@ -1,12 +1,16 @@
-import { useAppSelector } from "../../store";
+interface StatsProps {
+  currentMistakes: number,
+  textLength: number
+}
 
-const Stats = () => {
-  const currentMistakes = useAppSelector(state => state.stats.mistakes.current);
-  const textLength = useAppSelector(state => state.trainer.text.length);
+const Stats: React.FC<StatsProps> = (props) => {
+  
   return (
     <div>
-      <span>Current mistakes: {currentMistakes}</span>
-      <span> {currentMistakes === 0 ? 0 : currentMistakes/textLength * 100}%</span>
+      <span>Current mistakes: {props.currentMistakes}</span>
+      <span> {props.currentMistakes === 0 
+        ? 0 
+        : (props.currentMistakes/props.textLength * 100).toFixed(1)}%</span>
     </div>
   )
 }

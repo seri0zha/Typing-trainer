@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Header from "./components/Header";
 import Trainer from "./components/Trainer";
 import Stats from "./components/Stats";
+import { useAppSelector } from "./store";
 
 const AppWrapper = styled.div`
   color: #ddd;
@@ -12,11 +13,17 @@ const AppWrapper = styled.div`
 `;
 
 const App = () => {
+  const trainer = useAppSelector(state => state.trainer);
+  const stats = useAppSelector(state => state.stats);
   return (
     <AppWrapper>
       <Header/>
-      <Stats/>
-      <Trainer/>
+      <Stats
+        currentMistakes={stats.mistakes.current}
+        textLength={trainer.text.length}/>
+      <Trainer
+        text={trainer.text}
+        symbolToHighlight={trainer.currentPosition}/>
     </AppWrapper>
   );
 }
