@@ -1,37 +1,47 @@
 import { AnyAction, Reducer } from "@reduxjs/toolkit";
-import { SET_CURRENT_MISTAKES } from "../constants";
+import { RESET_CURRENT_STATS, SET_CURRENT_MISTAKES } from "../constants";
 
 interface StatsState {
-  mistakes: {
-    overall: number,
-    current: number,
+  current: {
+    mistakes: number,
+    charPerMinute: number,
   },
-  charactersPerMinute: number,
+  overall: {
+    mistakes: number,
+    charPerMinute: number
+  }
 }
 
 const initialState: StatsState = {
-  mistakes: {
-    overall: 0,
-    current: 0,
+  current: {
+    mistakes: 0,
+    charPerMinute: 0,
   },
-  charactersPerMinute: 0,
+  overall: {
+    mistakes: 0,
+    charPerMinute: 0,
+  },
 };
 
 const statsReducer: Reducer<StatsState, AnyAction> = 
-(state = initialState, action): StatsState => {
+  (state = initialState, action): StatsState => {
   switch(action.type) {
+
     case SET_CURRENT_MISTAKES: {
-      let mistakes = {
-        ...state.mistakes,
-        current: action.payload
-      };
       return {
-        ...state,
-        mistakes
+        current: {
+          ...state.current,
+          mistakes: action.payload,
+        },
+        overall: {...state.overall}
       }
     }
+
+    case RESET_CURRENT_STATS:
+      return {...initialState};
+  
     default:
-      return {...state}
+      return {...state};
   }
 };
 

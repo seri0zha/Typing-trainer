@@ -19,7 +19,7 @@ const App = () => {
     <AppWrapper>
       <Header/>
       <Stats
-        currentMistakes={stats.mistakes.current}
+        currentMistakes={stats.current.mistakes}
         textLength={trainer.text.length}/>
       <Trainer
         text={trainer.text}
