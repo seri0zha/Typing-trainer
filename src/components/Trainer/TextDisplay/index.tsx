@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { useAppSelector } from "../../../store";
 
 const TextWrapper = styled.div`
   font-size: 1.5em;
@@ -10,6 +9,7 @@ const TextWrapper = styled.div`
   padding: 10px 20px;
   border-radius: 10px;
   line-height: 1.5em;
+  font-family: "Noto Serif";
 `;
 
 const PassedText = styled.span`
