@@ -28,6 +28,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value[e.currentTarget.value.length - 1];
+    
     if (trainer.text !== '') {
       if (value === trainer.text[trainer.currentPosition]) {
         setOnMistake(false);
@@ -39,7 +40,6 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         }
       } else {
         if (!onMistake) {
-          debugger;
           dispatch(setCurrentMistakes(currentMistakes + 1));
         }
         setOnMistake(true);

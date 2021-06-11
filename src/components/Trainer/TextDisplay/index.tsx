@@ -21,6 +21,10 @@ const CurrentSymbol = styled.span`
   background-color: ${props => props.color};
 `;
 
+const StartBanner = styled.div`
+  text-align: center;
+`;
+
 interface TextDisplayProps {
   text: string,
   color: string,
@@ -36,7 +40,13 @@ const TextDisplay: React.FC<TextDisplayProps> = (props) => {
 
   return (
     <TextWrapper>
-      {splittedText}
+      {props.text.length > 0 
+        ? splittedText
+        : (
+          <StartBanner>
+            Press "Start" button to get the text and start whenever you're ready
+          </StartBanner>
+        )}
     </TextWrapper>
   )
 };

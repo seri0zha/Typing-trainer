@@ -1,16 +1,22 @@
 import { AnyAction, Reducer } from "@reduxjs/toolkit";
-import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_TEXT } from "../constants";
+import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_LANGUAGE, SET_SENTENCES_COUNT, SET_TEXT } from "../constants";
 
 interface TrainerReducerState {
   text: string,
   currentInputText: string,
   currentPosition: number,
+  trainingInProgress: boolean
+  sentences: number,
+  language: "ru" | "en",
 }
 
 const initialState: TrainerReducerState = {
   text: "",
   currentInputText: "",
-  currentPosition: 0
+  currentPosition: 0,
+  trainingInProgress: false,
+  sentences: 1,
+  language: "ru",
 };
 
 const trainerReducer: Reducer<TrainerReducerState, AnyAction> = 
@@ -32,6 +38,18 @@ const trainerReducer: Reducer<TrainerReducerState, AnyAction> =
       return {
         ...state,
         currentInputText: action.payload
+      }
+
+    case SET_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload
+      }
+    
+    case SET_SENTENCES_COUNT:
+      return {
+        ...state,
+        sentences: action.payload
       }
     default:
       return {...state};

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { fetchText } from "../../api";
-import { useAppDispatch } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
 import { setCurrentInputText, setCurrentPosition, setText } from "../../store/actions/trainerActions";
 import TextDisplay from "./TextDisplay";
 import Controls from "./Controls";
@@ -20,19 +20,16 @@ const TrainerWrapper = styled.div`
 `;
 
 const Trainer: React.FC<TrainerProps> = (props) => {
+  
+  const [sentencesCount, language] = useAppSelector(
+    state => [state.trainer.sentences, state.trainer.language]
+  );
   const dispatch = useAppDispatch();
   const [currentSymbolColor, setCurrentSymbolColor] = useState('green');
   const onStartButtonClick = async () => {
-    const response = await fetchText(1, 'en');
-    const fetchedText = response?.data;
-    // Response is the string which contains text
-    // between <p> and </p> tags
-    
-    const textWithoutTags = fetchedText.substring(
-      fetchedText.lastIndexOf('<p>') + 3,
-      fetchedText.lastIndexOf('</p>'));
+    const text = await fetchText(sentencesCount, language);
 
-    dispatch(setText(textWithoutTags));
+    dispatch(setText(text));
     dispatch(setCurrentPosition(0));
     dispatch(setCurrentInputText(''));
     dispatch(resetCurrentStats());
@@ -47,6 +44,8 @@ const Trainer: React.FC<TrainerProps> = (props) => {
       <TextInput 
         setCurrentSymbolColor={setCurrentSymbolColor}/>
       <Controls
+        sentencesCount={sentencesCount}
+        language={language}
         onStartButtonClick={onStartButtonClick}/>
     </TrainerWrapper>
   )
