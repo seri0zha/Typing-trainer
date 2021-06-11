@@ -12,11 +12,17 @@ interface TextInputProps {
 const Input = styled.input`
   font-size: 1.5em;
   padding: 10px 20px;
+  margin-bottom: 10px;
+  background-color: white;
+  color: black;
+  opacity: 0.8;
+  border: 0;
+  border-radius: 10px;
 `;
 
 const TextInput: React.FC<TextInputProps> = (props) => {
   const trainer = useAppSelector(state => state.trainer);
-  const currentMistakes = useAppSelector(state => state.stats.mistakes.current);
+  const currentMistakes = useAppSelector(state => state.stats.current.mistakes);
   const [onMistake, setOnMistake] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   
