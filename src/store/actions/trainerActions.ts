@@ -1,4 +1,4 @@
-import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_LANGUAGE, SET_SENTENCES_COUNT, SET_TEXT } from "../constants";
+import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_LANGUAGE, SET_SENTENCES_COUNT, SET_TEXT, SET_TRAINING_IN_PROGRESS } from "../constants";
 
 export const setCurrentPosition = (position: number) => ({
   type: SET_CURRENT_POSTITION, 
@@ -22,4 +22,9 @@ export const setLanguage = (language: "en" | "ru") => ({
 export const setSentencesCount = (count: number) => ({
   type: SET_SENTENCES_COUNT,
   payload: count
+});
+
+export const setTrainingInProgress = (inProgress: boolean) => ({
+  type: SET_TRAINING_IN_PROGRESS,
+  payload: inProgress,
 });

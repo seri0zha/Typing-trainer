@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import { Dispatch, RefObject, useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { setCurrentMistakes } from "../../../store/actions/statsActions";
-import { setCurrentInputText, setCurrentPosition } from "../../../store/actions/trainerActions";
+import { setCurrentInputText, setCurrentPosition, setTrainingInProgress } from "../../../store/actions/trainerActions";
 
 interface TextInputProps {
   // useState action to set string color
-  setTextFinished: React.Dispatch<React.SetStateAction<boolean>>,
-  setCurrentSymbolColor: React.Dispatch<React.SetStateAction<string>> 
+  setTextFinished: Dispatch<React.SetStateAction<boolean>>,
+  setCurrentSymbolColor: Dispatch<React.SetStateAction<string>>,
+  inputRef: RefObject<HTMLInputElement>,
 }
 
 const Input = styled.input`
@@ -36,6 +37,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
       if (trainer.currentPosition === trainer.text.length - 1) {
         props.setTextFinished(true);
         dispatch(setCurrentInputText(''));
+        dispatch(setTrainingInProgress(false));
       } else {
 
         // if value of current input char is equal to current char in text
@@ -62,7 +64,9 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   }
 
   return (
-    <Input 
+    <Input
+      ref={props.inputRef} 
+      disabled={!trainer.trainingInProgress}
       placeholder="..."
       value={trainer.currentInputText} 
       onChange={onInputChange}/>
