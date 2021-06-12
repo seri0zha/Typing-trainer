@@ -18,6 +18,7 @@ const Input = styled.input`
   opacity: 0.8;
   border: 0;
   border-radius: 10px;
+  font-family: "Noto Serif";
 `;
 
 const TextInput: React.FC<TextInputProps> = (props) => {
@@ -28,7 +29,6 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value[e.currentTarget.value.length - 1];
-    
     if (trainer.text !== '') {
       if (value === trainer.text[trainer.currentPosition]) {
         setOnMistake(false);
@@ -50,6 +50,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
 
   return (
     <Input 
+      placeholder="..."
       value={trainer.currentInputText} 
       onChange={onInputChange}/>
   )

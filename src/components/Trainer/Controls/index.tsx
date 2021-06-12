@@ -61,7 +61,7 @@ const Controls: React.FC<ControlsProps> = (props) => {
   }
   const handleSentencesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     let count = Number(event.currentTarget.value);
-    count = count > 10 ? 10 : count;
+    count = count > 6 ? 6 : count;
     dispatch(setSentencesCount(count));
   }
   return ( 
@@ -74,7 +74,7 @@ const Controls: React.FC<ControlsProps> = (props) => {
           title="Sentences">
           <SelectCount
             type="number"
-            min="1" max="10"
+            min="1" max="6"
             value={props.sentencesCount}
             onKeyDown={() => false}
             onChange={handleSentencesChange}

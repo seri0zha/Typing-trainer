@@ -10,6 +10,7 @@ const TextWrapper = styled.div`
   border-radius: 10px;
   line-height: 1.5em;
   font-family: "Noto Serif";
+  user-select: none;
 `;
 
 const PassedText = styled.span`
