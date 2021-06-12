@@ -1,8 +1,6 @@
 import styled from "styled-components";
 import Header from "./components/Header";
 import Trainer from "./components/Trainer";
-import Stats from "./components/Header/Stats";
-import { useAppSelector } from "./store";
 
 const AppWrapper = styled.div`
   color: #ddd;
