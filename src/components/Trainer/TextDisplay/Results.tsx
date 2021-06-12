@@ -1,22 +1,28 @@
 import styled from "styled-components";
+import { useAppSelector } from "../../../store";
 
 const ResultsWrapper = styled.div`
   font-family: Verdana;
+  display: flex;
+  justify-content: space-between;
 `;
 
 const Results = () => {
+
+  const stats = useAppSelector(state => state.stats);
+  const textLength = useAppSelector(state => state.trainer.text.length);
   return (
-    <ResultsWrapper>
-      <div>
-        Mistakes
-      </div>
-      <div>
-        Mistake percentage
-      </div>
-      <div>
-        CPM
-      </div>
-    </ResultsWrapper>
+    <>
+    Your results:
+      <ResultsWrapper>
+        <div>
+          {stats.current.mistakes} mistakes ({(stats.current.mistakes / textLength * 100).toFixed(1)}%)
+        </div>
+        <div>
+          {Math.ceil(textLength / stats.current.time * 1000 * 60)} Characters per minute
+        </div>
+      </ResultsWrapper>
+    </>
   )
 }
 

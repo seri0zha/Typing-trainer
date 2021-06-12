@@ -2,7 +2,7 @@ import { MutableRefObject, useRef, useState } from "react";
 import styled from "styled-components";
 import { fetchText } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setCurrentInputText, setCurrentPosition, setText, setTrainingInProgress } from "../../store/actions/trainerActions";
+import { setCurrentInputText, setCurrentPosition, setText } from "../../store/actions/trainerActions";
 import TextDisplay from "./TextDisplay";
 import Controls from "./Controls";
 import TextInput from "./TextInput";
@@ -30,7 +30,6 @@ const Trainer: React.FC<TrainerProps> = (props) => {
   const onStartButtonClick = async () => {
     const text = await fetchText(sentencesCount, language);
     setTextFinished(false);
-    dispatch(setTrainingInProgress(true));
     dispatch(setText(text));
     dispatch(setCurrentPosition(0));
     dispatch(setCurrentInputText(''));
@@ -45,7 +44,7 @@ const Trainer: React.FC<TrainerProps> = (props) => {
         symbolToHighlight={props.symbolToHighlight}
         color={currentSymbolColor}
         textFinished={textFinished}/>
-      <TextInput 
+      <TextInput
         inputRef={inputRef}
         setTextFinished={setTextFinished}
         setCurrentSymbolColor={setCurrentSymbolColor}/>

@@ -1,8 +1,8 @@
 import { Dispatch, RefObject, useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../store";
-import { setCurrentMistakes } from "../../../store/actions/statsActions";
-import { setCurrentInputText, setCurrentPosition, setTrainingInProgress } from "../../../store/actions/trainerActions";
+import { setCurrentMistakes, setTime } from "../../../store/actions/statsActions";
+import { setCurrentInputText, setCurrentPosition } from "../../../store/actions/trainerActions";
 
 interface TextInputProps {
   // useState action to set string color
@@ -27,6 +27,8 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   const trainer = useAppSelector(state => state.trainer);
   const currentMistakes = useAppSelector(state => state.stats.current.mistakes);
   const [onMistake, setOnMistake] = useState<boolean>(false);
+  const [trainingInProgress, setTrainingInProgress] = useState<boolean>(false);
+  const [startDate, setStartDate] = useState<number>(0);
   const dispatch = useAppDispatch();
   
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -35,13 +37,19 @@ const TextInput: React.FC<TextInputProps> = (props) => {
 
       // handle for the last char in input
       if (trainer.currentPosition === trainer.text.length - 1) {
+        const endDate = new Date().getTime();
         props.setTextFinished(true);
+        dispatch(setTime(endDate - startDate));
         dispatch(setCurrentInputText(''));
-        dispatch(setTrainingInProgress(false));
+        setTrainingInProgress(false);
       } else {
 
         // if value of current input char is equal to current char in text
         if (value === trainer.text[trainer.currentPosition]) {
+          if (!trainingInProgress) {
+            setStartDate(new Date().getTime());
+            setTrainingInProgress(true);
+          }
           setOnMistake(false);
           props.setCurrentSymbolColor("green");
           dispatch(setCurrentInputText(trainer.currentInputText + value));
@@ -66,7 +74,6 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   return (
     <Input
       ref={props.inputRef} 
-      disabled={!trainer.trainingInProgress}
       placeholder="..."
       value={trainer.currentInputText} 
       onChange={onInputChange}/>
