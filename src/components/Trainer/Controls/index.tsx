@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../../../store";
 import { setLanguage, setSentencesCount } from "../../../store/actions/trainerActions";
+import { ButtonShadowWrapper } from "../../ShadowWrapper";
 import OptionWrapper from "./OptionWrapper";
 
 interface ControlsProps {
@@ -10,13 +11,14 @@ interface ControlsProps {
   sentencesCount: number,
 }
 
-const StartButton = styled.button`
+const StartButton = styled(ButtonShadowWrapper)`
   font-size: 1em;
   padding: 10px 20px;
-  opacity: 0.9;
+  opacity: 0.8;
   background-color: white;
   border: 0;
   border-radius: 5px;
+  transition: 0.3s;
   &:hover {
     cursor: pointer;
     opacity: 1;

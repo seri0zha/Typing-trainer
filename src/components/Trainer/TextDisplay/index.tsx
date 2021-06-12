@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { DivShadowWrapper } from "../../ShadowWrapper";
 import Results from "./Results";
 
-const TextWrapper = styled.div`
+const TextWrapper = styled(DivShadowWrapper)`
   font-size: 1.5em;
   background-color: white;
   color: black;

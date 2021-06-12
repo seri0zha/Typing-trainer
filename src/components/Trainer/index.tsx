@@ -8,19 +8,15 @@ import Controls from "./Controls";
 import TextInput from "./TextInput";
 import { resetCurrentStats } from "../../store/actions/statsActions";
 
-interface TrainerProps {
-  text: string,
-  symbolToHighlight: number,
-}
-
 const TrainerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 
-const Trainer: React.FC<TrainerProps> = (props) => {
+const Trainer: React.FC = () => {
   const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
+  const trainer = useAppSelector(state => state.trainer);
   const [sentencesCount, language] = useAppSelector(
     state => [state.trainer.sentences, state.trainer.language]
   );
@@ -40,8 +36,8 @@ const Trainer: React.FC<TrainerProps> = (props) => {
   return (
     <TrainerWrapper>
       <TextDisplay 
-        text={props.text}
-        symbolToHighlight={props.symbolToHighlight}
+        text={trainer.text}
+        symbolToHighlight={trainer.currentPosition}
         color={currentSymbolColor}
         textFinished={textFinished}/>
       <TextInput

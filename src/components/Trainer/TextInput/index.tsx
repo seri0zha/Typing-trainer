@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { setCurrentMistakes, setTime } from "../../../store/actions/statsActions";
 import { setCurrentInputText, setCurrentPosition } from "../../../store/actions/trainerActions";
+import { InputShadowWrapper } from "../../ShadowWrapper";
 
 interface TextInputProps {
   // useState action to set string color
@@ -11,7 +12,7 @@ interface TextInputProps {
   inputRef: RefObject<HTMLInputElement>,
 }
 
-const Input = styled.input`
+const Input = styled(InputShadowWrapper)`
   font-size: 1.5em;
   padding: 10px 20px;
   margin-bottom: 10px;
