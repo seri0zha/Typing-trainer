@@ -5,7 +5,6 @@ interface OptionWrapperProps {
 }
 
 const Wrapper = styled.div`
-  margin-left: 10px;
   height: 100%;
 `;
 

@@ -9,9 +9,9 @@ import GlobalFonts from './fonts/fonts';
 ReactDOM.render(
   <React.StrictMode>
     <GlobalFonts/>
-    <Provider store={store}>
-      <App />
-    </Provider>
+      <Provider store={store}>
+        <App />
+      </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -24,11 +24,13 @@ const Trainer: React.FC<TrainerProps> = (props) => {
   const [sentencesCount, language] = useAppSelector(
     state => [state.trainer.sentences, state.trainer.language]
   );
-  const dispatch = useAppDispatch();
+  const [textFinished, setTextFinished] = useState<boolean>(false);
   const [currentSymbolColor, setCurrentSymbolColor] = useState('green');
+  const dispatch = useAppDispatch();
   const onStartButtonClick = async () => {
     const text = await fetchText(sentencesCount, language);
-
+    
+    setTextFinished(false);
     dispatch(setText(text));
     dispatch(setCurrentPosition(0));
     dispatch(setCurrentInputText(''));
@@ -40,8 +42,10 @@ const Trainer: React.FC<TrainerProps> = (props) => {
       <TextDisplay 
         text={props.text}
         symbolToHighlight={props.symbolToHighlight}
-        color={currentSymbolColor}/>
+        color={currentSymbolColor}
+        textFinished={textFinished}/>
       <TextInput 
+        setTextFinished={setTextFinished}
         setCurrentSymbolColor={setCurrentSymbolColor}/>
       <Controls
         sentencesCount={sentencesCount}

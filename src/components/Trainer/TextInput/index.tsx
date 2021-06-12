@@ -6,6 +6,7 @@ import { setCurrentInputText, setCurrentPosition } from "../../../store/actions/
 
 interface TextInputProps {
   // useState action to set string color
+  setTextFinished: React.Dispatch<React.SetStateAction<boolean>>,
   setCurrentSymbolColor: React.Dispatch<React.SetStateAction<string>> 
 }
 
@@ -30,20 +31,32 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value[e.currentTarget.value.length - 1];
     if (trainer.text !== '') {
-      if (value === trainer.text[trainer.currentPosition]) {
-        setOnMistake(false);
-        props.setCurrentSymbolColor("green");
-        dispatch(setCurrentInputText(trainer.currentInputText + value));
-        dispatch(setCurrentPosition(trainer.currentPosition+1));
-        if (value === ' ') {
-          dispatch(setCurrentInputText(''));
-        }
+
+      // handle for the last char in input
+      if (trainer.currentPosition === trainer.text.length - 1) {
+        props.setTextFinished(true);
+        dispatch(setCurrentInputText(''));
       } else {
-        if (!onMistake) {
-          dispatch(setCurrentMistakes(currentMistakes + 1));
+
+        // if value of current input char is equal to current char in text
+        if (value === trainer.text[trainer.currentPosition]) {
+          setOnMistake(false);
+          props.setCurrentSymbolColor("green");
+          dispatch(setCurrentInputText(trainer.currentInputText + value));
+          dispatch(setCurrentPosition(trainer.currentPosition+1));
+
+          // clear input after every word
+          if (value === ' ') {
+            dispatch(setCurrentInputText(''));
+          }
+        } else {
+          // mistakes handle
+          if (!onMistake) {
+            dispatch(setCurrentMistakes(currentMistakes + 1));
+          }
+          setOnMistake(true);
+          props.setCurrentSymbolColor("red");
         }
-        setOnMistake(true);
-        props.setCurrentSymbolColor("red");
       }
     }
   }

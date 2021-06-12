@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Results from "./Results";
 
 const TextWrapper = styled.div`
   font-size: 1.5em;
@@ -9,8 +10,10 @@ const TextWrapper = styled.div`
   padding: 10px 20px;
   border-radius: 10px;
   line-height: 1.5em;
-  font-family: "Noto Serif";
   user-select: none;
+  & > * {
+    font-family: "Noto Serif";
+  }
 `;
 
 const PassedText = styled.span`
@@ -30,6 +33,7 @@ interface TextDisplayProps {
   text: string,
   color: string,
   symbolToHighlight: number,
+  textFinished: boolean,
 }
 
 const TextDisplay: React.FC<TextDisplayProps> = (props) => {
@@ -41,7 +45,8 @@ const TextDisplay: React.FC<TextDisplayProps> = (props) => {
 
   return (
     <TextWrapper>
-      {props.text.length > 0 
+      {props.textFinished ? <Results/>
+        : props.text.length > 0 
         ? splittedText
         : (
           <StartBanner>

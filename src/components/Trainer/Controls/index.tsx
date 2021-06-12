@@ -33,6 +33,9 @@ const SelectLanguage = styled.select`
   opacity: 0.8;
   font-size: 1em;
   border: 0;
+  box-sizing: border-box;
+  border: 1px solid #999;
+  margin-left: 10px;
   &option {
     background-color: white;
   }
@@ -43,6 +46,9 @@ const SelectCount = styled.input`
   height: 100%;
   font-size: 1em;
   max-width: 50px;
+  box-sizing: border-box;
+  border: 1px solid #999;
+  margin: 0 10px;
 `;
 
 const Options = styled.div`
@@ -50,7 +56,6 @@ const Options = styled.div`
   align-items: center;
   color: black;
   grid-direction: row;
-  margin-left: 10px;
 `;
 
 const Controls: React.FC<ControlsProps> = (props) => {

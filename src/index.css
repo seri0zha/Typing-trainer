@@ -2,4 +2,9 @@ body {
   margin: 0;
   padding: 0;
   background-color: #eeeee0;
+  line-height: 1em;
+}
+
+* {
+  font-family: Verdana;
 }
