@@ -34,7 +34,7 @@ interface TextDisplayProps {
   text: string,
   color: string,
   symbolToHighlight: number,
-  textFinished: boolean,
+  trainingInProgress: boolean,
 }
 
 const TextDisplay: React.FC<TextDisplayProps> = (props) => {
@@ -46,7 +46,7 @@ const TextDisplay: React.FC<TextDisplayProps> = (props) => {
 
   return (
     <TextWrapper>
-      {props.textFinished ? <Results/>
+      {(!props.trainingInProgress) && (props.text !== "") ? <Results/>
         : props.text.length > 0 
         ? splittedText
         : (

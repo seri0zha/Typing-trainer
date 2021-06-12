@@ -23,3 +23,8 @@ export const setSentencesCount = (count: number) => ({
   type: SET_SENTENCES_COUNT,
   payload: count
 });
+
+export const setTrainingInProgress = (inProgress: boolean) => ({
+  type: SET_TRAINING_IN_PROGRESS,
+  payload: inProgress,
+});

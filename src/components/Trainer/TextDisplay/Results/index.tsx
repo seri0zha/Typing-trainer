@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useAppSelector } from "../../../store";
+import { useAppSelector } from "../../../../store";
 
 const ResultsWrapper = styled.div`
   font-family: Verdana;

@@ -2,7 +2,7 @@ import { MutableRefObject, useRef, useState } from "react";
 import styled from "styled-components";
 import { fetchText } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setCurrentInputText, setCurrentPosition, setText } from "../../store/actions/trainerActions";
+import { setCurrentInputText, setCurrentPosition, setText, setTrainingInProgress } from "../../store/actions/trainerActions";
 import TextDisplay from "./TextDisplay";
 import Controls from "./Controls";
 import TextInput from "./TextInput";
@@ -20,13 +20,12 @@ const Trainer: React.FC = () => {
   const [sentencesCount, language] = useAppSelector(
     state => [state.trainer.sentences, state.trainer.language]
   );
-  const [textFinished, setTextFinished] = useState<boolean>(false);
   const [currentSymbolColor, setCurrentSymbolColor] = useState('green');
   const dispatch = useAppDispatch();
   const onStartButtonClick = async () => {
     const text = await fetchText(sentencesCount, language);
-    setTextFinished(false);
     dispatch(setText(text));
+    dispatch(setTrainingInProgress(true));
     dispatch(setCurrentPosition(0));
     dispatch(setCurrentInputText(''));
     dispatch(resetCurrentStats());
@@ -35,14 +34,13 @@ const Trainer: React.FC = () => {
   }
   return (
     <TrainerWrapper>
-      <TextDisplay 
+      <TextDisplay
+        trainingInProgress={trainer.trainingInProgress}
         text={trainer.text}
         symbolToHighlight={trainer.currentPosition}
-        color={currentSymbolColor}
-        textFinished={textFinished}/>
+        color={currentSymbolColor}/>
       <TextInput
         inputRef={inputRef}
-        setTextFinished={setTextFinished}
         setCurrentSymbolColor={setCurrentSymbolColor}/>
       <Controls
         sentencesCount={sentencesCount}

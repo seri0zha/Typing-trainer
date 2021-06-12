@@ -2,12 +2,11 @@ import { Dispatch, RefObject, useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../../store";
 import { setCurrentMistakes, setTime } from "../../../store/actions/statsActions";
-import { setCurrentInputText, setCurrentPosition } from "../../../store/actions/trainerActions";
+import { setCurrentInputText, setCurrentPosition, setTrainingInProgress } from "../../../store/actions/trainerActions";
 import { InputShadowWrapper } from "../../ShadowWrapper";
 
 interface TextInputProps {
   // useState action to set string color
-  setTextFinished: Dispatch<React.SetStateAction<boolean>>,
   setCurrentSymbolColor: Dispatch<React.SetStateAction<string>>,
   inputRef: RefObject<HTMLInputElement>,
 }
@@ -28,29 +27,25 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   const trainer = useAppSelector(state => state.trainer);
   const currentMistakes = useAppSelector(state => state.stats.current.mistakes);
   const [onMistake, setOnMistake] = useState<boolean>(false);
-  const [trainingInProgress, setTrainingInProgress] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<number>(0);
   const dispatch = useAppDispatch();
   
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value[e.currentTarget.value.length - 1];
-    if (trainer.text !== '') {
-
+    if (trainer.text !== '' && trainer.trainingInProgress) {
+      
       // handle for the last char in input
       if (trainer.currentPosition === trainer.text.length - 1) {
         const endDate = new Date().getTime();
-        props.setTextFinished(true);
         dispatch(setTime(endDate - startDate));
         dispatch(setCurrentInputText(''));
-        setTrainingInProgress(false);
+        dispatch(setTrainingInProgress(false));
       } else {
 
         // if value of current input char is equal to current char in text
         if (value === trainer.text[trainer.currentPosition]) {
-          if (!trainingInProgress) {
+          if (trainer.currentPosition === 0)
             setStartDate(new Date().getTime());
-            setTrainingInProgress(true);
-          }
           setOnMistake(false);
           props.setCurrentSymbolColor("green");
           dispatch(setCurrentInputText(trainer.currentInputText + value));
