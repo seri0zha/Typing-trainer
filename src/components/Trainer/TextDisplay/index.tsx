@@ -3,7 +3,7 @@ import { DivShadowWrapper } from "../../ShadowWrapper";
 import Results from "./Results";
 
 const TextWrapper = styled(DivShadowWrapper)`
-  font-size: 1.5em;
+  font-size: 1.3em;
   background-color: white;
   color: black;
   opacity: 0.8;

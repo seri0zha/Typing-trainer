@@ -19,7 +19,7 @@ const Results = () => {
           {stats.current.mistakes} mistakes ({(stats.current.mistakes / textLength * 100).toFixed(1)}%)
         </div>
         <div>
-          {Math.ceil(textLength / stats.current.time * 1000 * 60)} Characters per minute
+          {Math.ceil(textLength / stats.current.time * 1000 * 60)} Chars per minute
         </div>
       </ResultsWrapper>
     </>
