@@ -1,4 +1,4 @@
-import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_LANGUAGE, SET_SENTENCES_COUNT, SET_TEXT, SET_TRAINING_IN_PROGRESS, START_TRAINING } from "../constants";
+import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_LANGUAGE, SET_SENTENCES_COUNT, SET_TEXT, SET_TRAINING_IN_PROGRESS, START_TRAINING, TOGGLE_FETCHING } from "../constants";
 
 export const setCurrentPosition = (position: number) => ({
   type: SET_CURRENT_POSTITION, 
@@ -32,4 +32,8 @@ export const setTrainingInProgress = (inProgress: boolean) => ({
 export const startTraining = (text: string) => ({
   type: START_TRAINING,
   payload: text,
+});
+
+export const toggleFetching = () => ({
+  type: TOGGLE_FETCHING,
 });
