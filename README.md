@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# Тренажёр слепой печати
+## О приложении
+Данное приложение представляет собой реализацию клавиатурного тренажёра для развития
+навыка слепой печати.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Пользователь в реальном времени получает случайно сгенерированный текст с выбранным языком и
+количеством предложений. В режиме тренировке пользователь должен полностью повторить текущий текст.
+По окончанию набора на экран выводится количество допущенных ошибках и средняя скорость печати.
 
-## Available Scripts
+## Технические подробности
+В приложении используется следующий стек технологий:
+- React + Typescript
+- Redux для хранения состояния приложения
+- styled-components для применения стилей к компонентам
+- Axios для асинхронных запросов
 
-In the project directory, you can run:
+Текст для печати генерируется при помощи публичных API:
+1. https://fish-text.ru/api
+> Генерация рыбатекста происходит довольно просто: есть несколько фиксированных наборов фраз и словочетаний, из которых в опредёленном порядке формируются предложения. Предложения складываются в абзацы – и вы наслаждетесь очередным бредошедевром.
+2. https://baconipsum.com/json-api/
+>*What is Bacon Ipsum?
+Simply put, it’s a take on the lorem ipsum filler text used when doing design mockups.*
 
-### `yarn start`
+## Запуск приложения
+На данный момент приложение использует хостинг от Firebase и доступно по адресу:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+https://typing-trainer-1521b.web.app/
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Для локального развёртывания тренажёра нужно повторить следующие шаги:
+1. Загрузка файлов приложения и переход в рабочую директорию
+> ### `$ git clone https://github.com/seri0zha/Typing-trainer.git`
+> ### `$ cd typing-trainer`
+2. Установку необходимых зависимостей лучше производить при помощи Yarn
+> ### `$ yarn install`
+Но можно и с помощью npm:
+> ### `$ npm install`
+3. После установки зависимостей можно запустить локальный сервер командой
+> ### `$ yarn start`
 
-### `yarn test`
+Или
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+> ### `$ npm start`
 
-### `yarn build`
+4. После запуска локального сервера приложение будет доступно по адресу 
+https://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Возможные доработки
+Приложение уже развёрнуто на Firebase, что позволит также добавить авторизацию и
+сохранение прогресса. Код также не идеален, и когда-нибудь каждая недоработка 
+будет беспощадно отрефакторена...
