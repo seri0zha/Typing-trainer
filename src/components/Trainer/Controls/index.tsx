@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppDispatch } from "../../../store";
+import { useAppDispatch, useAppSelector } from "../../../store";
 import { setLanguage, setSentencesCount } from "../../../store/actions/trainerActions";
+import Loader from "../../Loader";
 import { ButtonShadowWrapper } from "../../ShadowWrapper";
 import OptionWrapper from "./OptionWrapper";
 
@@ -53,16 +54,16 @@ const SelectCount = styled.input`
   margin: 0 10px;
 `;
 
-const Options = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   color: black;
-  grid-direction: row;
 `;
 
 const Controls: React.FC<ControlsProps> = (props) => {
 
   const dispatch = useAppDispatch();
+  const textIsFetching = useAppSelector(state => state.trainer.status.textIsFetching);
   const handleLanguageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(setLanguage(event.currentTarget.value as "en" || "ru"));
   }
@@ -73,10 +74,13 @@ const Controls: React.FC<ControlsProps> = (props) => {
   }
   return ( 
     <ControlsWrapper>
-      <StartButton onClick={props.onStartButtonClick}>
-        Start
-      </StartButton>
-      <Options>
+      <Wrapper>
+        <StartButton onClick={props.onStartButtonClick}>
+          Start
+        </StartButton>
+        {textIsFetching ? <Loader/> : ""}
+      </Wrapper>
+      <Wrapper>
         <OptionWrapper
           title="Sentences">
           <SelectCount
@@ -96,7 +100,7 @@ const Controls: React.FC<ControlsProps> = (props) => {
             <option value="en">English</option>
           </SelectLanguage>
         </OptionWrapper>
-      </Options>
+      </Wrapper>
     </ControlsWrapper>
   )
 }

@@ -2,7 +2,7 @@ import { MutableRefObject, useRef, useState } from "react";
 import styled from "styled-components";
 import { fetchText } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { startTraining } from "../../store/actions/trainerActions";
+import { startTraining, toggleFetching } from "../../store/actions/trainerActions";
 import TextDisplay from "./TextDisplay";
 import Controls from "./Controls";
 import TextInput from "./TextInput";
@@ -24,16 +24,18 @@ const Trainer: React.FC = () => {
   const [currentSymbolColor, setCurrentSymbolColor] = useState('green');
   const dispatch = useAppDispatch();
   const onStartButtonClick = async () => {
+    dispatch(toggleFetching());
     const text = await fetchText(sentencesCount, language);
+    dispatch(toggleFetching());
     dispatch(startTraining(text));
     dispatch(resetCurrentStats());
     setCurrentSymbolColor("green");
     inputRef.current.focus();
-  }
+  };
   return (
     <TrainerWrapper>
       <TextDisplay
-        trainingInProgress={trainer.trainingInProgress}
+        trainingInProgress={trainer.status.trainingInProgress}
         text={trainer.text}
         symbolToHighlight={trainer.currentPosition}
         color={currentSymbolColor}/>
