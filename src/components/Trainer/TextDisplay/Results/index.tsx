@@ -13,7 +13,7 @@ const Results = () => {
   const textLength = useAppSelector(state => state.trainer.text.length);
   return (
     <>
-    Your results:
+    Your result:
       <ResultsWrapper>
         <div>
           {stats.current.mistakes} mistakes ({(stats.current.mistakes / textLength * 100).toFixed(1)}%)

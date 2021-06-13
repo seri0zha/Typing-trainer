@@ -2,7 +2,7 @@ import { MutableRefObject, useRef, useState } from "react";
 import styled from "styled-components";
 import { fetchText } from "../../api";
 import { useAppDispatch, useAppSelector } from "../../store";
-import { setCurrentInputText, setCurrentPosition, setText, setTrainingInProgress } from "../../store/actions/trainerActions";
+import { startTraining } from "../../store/actions/trainerActions";
 import TextDisplay from "./TextDisplay";
 import Controls from "./Controls";
 import TextInput from "./TextInput";
@@ -15,6 +15,7 @@ const TrainerWrapper = styled.div`
 `;
 
 const Trainer: React.FC = () => {
+  //ref for input field
   const inputRef = useRef() as MutableRefObject<HTMLInputElement>;
   const trainer = useAppSelector(state => state.trainer);
   const [sentencesCount, language] = useAppSelector(
@@ -24,10 +25,7 @@ const Trainer: React.FC = () => {
   const dispatch = useAppDispatch();
   const onStartButtonClick = async () => {
     const text = await fetchText(sentencesCount, language);
-    dispatch(setText(text));
-    dispatch(setTrainingInProgress(true));
-    dispatch(setCurrentPosition(0));
-    dispatch(setCurrentInputText(''));
+    dispatch(startTraining(text));
     dispatch(resetCurrentStats());
     setCurrentSymbolColor("green");
     inputRef.current.focus();

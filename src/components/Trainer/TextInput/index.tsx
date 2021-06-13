@@ -40,6 +40,9 @@ const TextInput: React.FC<TextInputProps> = (props) => {
         dispatch(setTime(endDate - startDate));
         dispatch(setCurrentInputText(''));
         dispatch(setTrainingInProgress(false));
+
+        // remove focus if last char typed
+        props.inputRef?.current?.blur();
       } else {
 
         // if value of current input char is equal to current char in text
@@ -71,6 +74,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
     <Input
       ref={props.inputRef} 
       placeholder="..."
+      disabled={!trainer.trainingInProgress}
       value={trainer.currentInputText} 
       onChange={onInputChange}/>
   )

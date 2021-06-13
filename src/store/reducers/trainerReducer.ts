@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from "@reduxjs/toolkit";
-import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_LANGUAGE, SET_SENTENCES_COUNT, SET_TEXT, SET_TRAINING_IN_PROGRESS } from "../constants";
+import { SET_CURRENT_INPUT_TEXT, SET_CURRENT_POSTITION, SET_LANGUAGE, SET_SENTENCES_COUNT, SET_TEXT, SET_TRAINING_IN_PROGRESS, START_TRAINING } from "../constants";
 
 interface TrainerReducerState {
   text: string,
@@ -56,6 +56,14 @@ const trainerReducer: Reducer<TrainerReducerState, AnyAction> =
       return {
         ...state,
         trainingInProgress: action.payload
+      }
+    case START_TRAINING: 
+      return {
+        ...state,
+        trainingInProgress: true,
+        currentPosition: 0,
+        currentInputText: '',
+        text: action.payload,
       }
     default:
       return {...state};
