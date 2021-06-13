@@ -12,7 +12,7 @@ interface TextInputProps {
 }
 
 const Input = styled(InputShadowWrapper)`
-  font-size: 1.5em;
+  font-size: 1.3em;
   padding: 10px 20px;
   margin-bottom: 10px;
   background-color: white;
