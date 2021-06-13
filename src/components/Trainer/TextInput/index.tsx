@@ -32,7 +32,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
   
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value[e.currentTarget.value.length - 1];
-    if (trainer.text !== '' && trainer.trainingInProgress) {
+    if (trainer.text !== '' && trainer.status.trainingInProgress) {
       
       // handle for the last char in input
       if (trainer.currentPosition === trainer.text.length - 1) {
@@ -74,7 +74,7 @@ const TextInput: React.FC<TextInputProps> = (props) => {
     <Input
       ref={props.inputRef} 
       placeholder="..."
-      disabled={!trainer.trainingInProgress}
+      disabled={!trainer.status.trainingInProgress}
       value={trainer.currentInputText} 
       onChange={onInputChange}/>
   )

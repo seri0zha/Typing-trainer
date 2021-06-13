@@ -12,4 +12,4 @@ export const resetCurrentStats = () => ({
 export const setTime = (time: number) => ({
   type: SET_TIME,
   payload: time
-})
+});
